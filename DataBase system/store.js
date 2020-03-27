@@ -11,13 +11,8 @@ module.exports = {
       })
     },
     retrieveHops() {
-        knex('hops').select('*').then(function(varieties){
-            varieties.forEach(element => {
-                console.log(element);
-                return element;
-            });
-        });
-    } 
+        return knex('hops').select('*');
+    }
 }
 
   

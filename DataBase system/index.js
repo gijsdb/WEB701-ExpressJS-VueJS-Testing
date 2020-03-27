@@ -11,8 +11,10 @@ app.use(bodyParser.json())
 app.use('/', router);
 
 app.get('/retrieve', function (req, res) {
-    var data = store.retrieveHops();
-    res.json(data);
+    store.retrieveHops().then((hop) => 
+        res.json(hop)
+    );
+   
 })
 
 app.post('/addhop', (req, res) => {
