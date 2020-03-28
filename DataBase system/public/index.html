@@ -2,8 +2,11 @@
 <html>
 <head>
   <title>Store and retrieve</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.0.3/vue-resource.min.js"></script> 
 </head>
 <body>
+  <div id="app">
   <form class="AddHops">
     <h1>Add new hops</h1>
     <input type="text" class="variety" placeholder="variety">
@@ -14,7 +17,43 @@
     <input type="submit" value="Add product">
   </form>
     <h1>Hops stored in database</h1>
-    <p></p>
+    <ul v-for="hop in hops">
+      <li>
+          {{ hop.variety }}
+      </li>
+      <li>
+        {{ hop.amount}}
+      </li>
+      <li>
+        {{ hop.price }}
+      </li>
+    </ul>
+  </div>
+  <script>
+    new Vue({
+        el: '#app',
+        data: {
+            hops: []
+        },
+
+        created() {
+            this.fetchData()
+        },
+        
+        methods: {
+            fetchData() {
+                this.$http.get('http://localhost:7556/retrieve')
+                  .then(result => {
+                      console.log(result);
+                      this.hops = result.data
+                  })
+            }
+        }
+
+ });
+
+  </script>
   <script src="/app.js"></script>
+
 </body>
 </html>
