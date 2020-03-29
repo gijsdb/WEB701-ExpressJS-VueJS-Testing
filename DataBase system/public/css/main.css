@@ -1,0 +1,11 @@
+body {
+    background-color: lightgray;
+}
+
+.hopCard {
+    margin-top: 10px;
+}
+
+.padTop {
+    padding-top: 2em;
+}

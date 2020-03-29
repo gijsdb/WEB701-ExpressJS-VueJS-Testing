@@ -1,4 +1,4 @@
-const AddHops = document.querySelector('.AddHops')
+const AddHops = document.querySelector('.addHops')
 AddHops.addEventListener('submit', (e) => {
   e.preventDefault()
   const variety = AddHops.querySelector('.variety').value
