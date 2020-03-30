@@ -1,4 +1,4 @@
-const knex = require('knex')(require('./knexfile'))
+const knex = require('knex')(require('./knexFile'))
 module.exports = {
     addHops({ variety, amount, bitterness, sweetness, price }) {
         console.log(`added ${amount} of Hop ${variety} with bitterness of ${bitterness} and sweetness of ${sweetness} at a price of ${price}`)
