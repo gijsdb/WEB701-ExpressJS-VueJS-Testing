@@ -2,7 +2,7 @@ module.exports = {
     client: 'mysql',
     connection: {
       user: 'root',
-      password: 'password',
+      password: "password",
       database: 'web701_ms2_test'
     }
   }
