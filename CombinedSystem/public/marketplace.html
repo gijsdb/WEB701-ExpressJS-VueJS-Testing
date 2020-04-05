@@ -4,88 +4,45 @@
   <title>Store and retrieve</title>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.0.3/vue-resource.min.js"></script> 
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
-    <div class="container" id="app">    
-        <div class="logout"> 
-            <a href="/logout"><button>Logout</button></a>
-        </div>
-      
-        <div class="row padTop">
-          <div class="col">
-            <form class="AddHops">
-              <h1>Add new hops</h1>
-              <label>Variety</label>
-              <input type="text"   class="variety" placeholder="variety"><br>
-              <label>Weight</label>
-              <input type="number" class="amount" placeholder="0(kg)"><br>
-              <label>Bitterness</label>
-              <input type="number" class="bitterness" placeholder="0 - 10"><br>
-              <label>Sweetness</label>
-              <input type="number" class="sweetness" placeholder="0 - 10"><br>
-              <label>Price</label>
-              <input type="number" class="price" placeholder="0 Dollars"><br>
-              <input type="submit" value="Add product">
-            </form>
-          </div>
-        </div>
-      
-        <div class="row padTop">
-          <div class="col">
-            <h1>Hops stored in database</h1>
-          </div>
-        </div>
 
+    <div class="container" id="app"> 
+
+        <logout></logout>
+        
+        <div class="row padTop">
+          <div class="col">
+            <a href="/addproduct"><button>Add product for sale</button></a>         
+          </div>
+        </div>
+      
+        <div class="row padTop">
+          <div class="col">
+            <h1>Hops for sale</h1>
+          </div>
+        </div>
+       
         <div class="row" v-for="chunk in productChunks">
-            <div class="col-md-4" v-for="hop in chunk">
+            <div class="col-md-4" v-for="hop in chunk"> 
               <div class="card hopCard" style="width: 18rem;">
                 <img src="./img/isolatedHop.png" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">{{ hop.variety }}</h5>
                   <p class="card-text"> Bitterness: {{hop.bitterness}}</p>
                   <p class="card-text"> Sweetness: {{hop.sweetness}}</p>
-                  <p class="card-text"> Price: {{hop.price}}</p>
+                  <p class="card-text"> Price: {{hop.price}}</p>                 
                 </div>
+              </div>
             </div>
         </div>
-
-        </div>
-
+  
     </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
-  <script>
-    new Vue({
-        el: '#app',
-        data: {
-            hops: []
-        },
-
-        created() {
-            this.fetchData()
-        },
-        
-        computed: {
-          productChunks(){
-            return _.chunk(Object.values(this.hops), 3);
-        }
-        },
-
-        methods: {
-            fetchData() {
-                this.$http.get('http://localhost:7556/retrieve')
-                  .then(result => {
-                      console.log(result);
-                      this.hops = result.data
-                  })
-            }
-        }
-
- });
-
-  </script>
-  <script src="./js/app.js"></script>
+  <script src="./js/vue.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

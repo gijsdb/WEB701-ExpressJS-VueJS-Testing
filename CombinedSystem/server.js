@@ -2,17 +2,17 @@
 const express = require('express');
 const app = express();
 const passport = require('passport');
-const auth = require('./auth');
 const cookieParser = require('cookie-parser');
-const cookieSession = require('cookie-session');
 const path = require('path');
 const router = express.Router();
 const bodyParser = require('body-parser')
 const store = require('./store')
+const auth = require('./auth');
+const cookieSession = require('cookie-session');
+const checkID = require('./checkID')
 
 // Set auth to use passport.js
 auth(passport);
-
 // Intialize passport
 app.use(passport.initialize());
 
@@ -20,6 +20,7 @@ app.use(passport.initialize());
 app.use(express.static(path.join(__dirname,"public")));
 app.use('/', router);
 app.use(bodyParser.json())
+app.use(cookieParser());
 
 // Set application to use cookies
 app.use(cookieSession({
@@ -27,13 +28,11 @@ app.use(cookieSession({
     keys: ['123']
 }));
 
-app.use(cookieParser());
-
 // When visiting / if the user has a cookie they are logged in
 app.get('/', (req, res) => {
     if (req.session.token) {
         res.cookie('token', req.session.token);
-        res.sendFile(path.join('/public/database.html'));
+        res.sendFile(path.join('/public/marketplace.html'));
         /*
         res.json({
             status: 'session cookie set AKA logged in'
@@ -54,23 +53,45 @@ app.get('/auth/google', passport.authenticate('google', {
 }));
 
 // Sets token returned by Google
-app.get('/auth/google/callback',
-    passport.authenticate('google', {failureRedirect:'/'}),
+app.get('/auth/google/callback', passport.authenticate('google', {failureRedirect:'/'}),
     (req, res) => {
         req.session.token = req.user.token;
-        res.redirect('/database');
+        res.redirect('/marketplace');
     }
 );
 
 // Ensure user can only access loggedIn.html once they have logged in
-app.get('/database',(req, res) => {
+app.get('/marketplace',(req, res) => {
     if(req.session.token) {
         res.cookie('token', req.session.token);
-        res.sendFile(path.join(__dirname+'/public/database.html'));
+        res.sendFile(path.join(__dirname+'/public/marketplace.html'));
     } else {
         res.sendFile(path.join(__dirname+'/public/fail.html'));
     }
-   
+})
+
+app.get('/addproduct',(req, res) => {
+    if(req.session.token) {
+        res.cookie('token', req.session.token);
+        res.sendFile(path.join(__dirname+'/public/addproduct.html'));
+    } else {
+        res.sendFile(path.join(__dirname+'/public/fail.html'));
+    }
+})
+
+app.get('/buyproduct',(req, res) => {
+    if(req.session.token) {
+        res.cookie('token', req.session.token);
+        res.sendFile(path.join(__dirname+'/public/buyproduct.html'));
+    } else {
+        res.sendFile(path.join(__dirname+'/public/fail.html'));
+    }
+})
+
+app.get('/retrieve/:id', function(req, res) {
+    store.retrieveHop(req, res).then((hop) =>
+        res.json(hop)
+    );
 })
 
 app.get('/retrieve', function (req, res) {
