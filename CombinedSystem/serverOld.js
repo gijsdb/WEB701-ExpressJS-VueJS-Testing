@@ -1,24 +1,20 @@
-// Setting up required constants
 const express = require('express');
 const app = express();
-const router = express.Router();
-const bodyParser = require('body-parser')
-const store = require('./store')
-//const auth = require('./auth2')
-const cors = require('cors')
-const checkID = require('./checkID')
+const bodyParser = require('body-parser');
+const store = require('./store');
+const cors = require('cors');
+//const auth = require('./auth');
+//const checkID = require('./checkID');
 
 
-// Mounts middleware to directory path
-app.use('/', router);
-app.use(bodyParser.json())
-app.use(cors())
+
+app.use(cors);
+app.use(bodyParser.json());
 
 
-// When visiting / if the user has a cookie they are logged in
-app.get('/', (req, res) => {
-    res.json("loaded")
-});
+app.get('/tokensignin', function(req,res) {
+    console.log(req.body)
+})
 
 app.get('/retrieve/:id', function(req, res) {
     store.retrieveHop(req, res).then((hop) =>
@@ -30,7 +26,6 @@ app.get('/retrieve', function (req, res) {
     store.retrieveHops().then((hop) => 
         res.json(hop)
     );
-   
 })
 
 app.post('/addhop', (req, res) => {
