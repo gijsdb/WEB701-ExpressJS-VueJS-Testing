@@ -10,7 +10,7 @@
         <router-link class="nav-link" to="login">Login</router-link>
     </li>
     <li v-if="$store.state.isUserLoggedIn" class="nav-item">
-        <router-link class="nav-link" to="marketplace">Marketplace</router-link>
+        <router-link class="nav-link" to="../marketplace">Marketplace</router-link>
     </li>
     <li v-if="$store.state.isUserLoggedIn" class="nav-item">
         <p class="nav-link" @click="logout">Log out</p>

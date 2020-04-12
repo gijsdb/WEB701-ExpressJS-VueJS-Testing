@@ -10,4 +10,5 @@ module.exports = (app) => {
     app.post('/addhop', HopController.addhop) 
 
     app.get('/retrievehops', HopController.retrievehops) 
+    app.get('/retrievehop/:id', HopController.retrievehop) 
 }

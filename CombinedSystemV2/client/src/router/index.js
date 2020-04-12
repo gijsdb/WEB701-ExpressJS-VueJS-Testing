@@ -4,11 +4,13 @@ import Register from '@/components/Register'
 import Home from '@/components/Home'
 import Login from '@/components/Login'
 import Marketplace from '@/components/Marketplace'
+import BuyHop from '@/components/BuyHop'
 import store from '../store/store'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -29,6 +31,24 @@ export default new Router({
       path: '/marketplace',
       name: 'marketplace',
       component: Marketplace,
+      async beforeEnter (to, from, next) {
+        try {
+          var hasPermission = store.state.isUserLoggedIn
+          if (hasPermission) {
+            next()
+          }
+        } catch (error) {
+          console.log(error)
+          next({
+            name: 'home'
+          })
+        }
+      }
+    },
+    {
+      path: '/buyhop/:id',
+      name: 'buyhop',
+      component: BuyHop,
       async beforeEnter (to, from, next) {
         try {
           var hasPermission = store.state.isUserLoggedIn

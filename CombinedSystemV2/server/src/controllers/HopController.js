@@ -21,5 +21,27 @@ module.exports = {
           error: 'Theres an error'
         })
       }
+    },
+    async retrievehop (req, res) {
+      try {
+        const hopid = req.params.id
+        console.log(hopid)
+        const hop = await Hop.findOne({
+          where: {
+            id: hopid
+          }
+        })
+        if(!hop) {
+          res.status(403).send({
+            error: 'No hop found with id'
+          })
+        }
+        const hopJson = hop.toJSON()
+        res.send(hopJson)
+      } catch(err) {
+        res.status(500).send({
+          error: 'An error occured'
+        })
+      }
     }
 }

@@ -7,7 +7,7 @@
               <label>Variety</label>
               <input type="text" v-model="variety" name="variety" placeholder="variety"><br>
               <label>Weight</label>
-              <input type="number" v-model="amount" name="amount" placeholder="0(kg)"><br>
+              <input type="number" v-model="weight" name="amount" placeholder="0(kg)"><br>
               <label>Bitterness</label>
               <input type="number" v-model="bitterness" name="bitterness" placeholder="0 - 10"><br>
               <label>Sweetness</label>
@@ -45,6 +45,7 @@ export default {
           sweetness: this.sweetness,
           price: this.price
         })
+        this.$router.replace({'query': null})
       } catch (error) {
         this.error = error.response.data.error
       }

@@ -6,6 +6,11 @@
             <p>This project shows how I built the basic functionality required using Express JS for the backend and Vue JS for the frontend.</p>
         </div>
     </div>
+    <div class="row" v-if="$store.state.isUserLoggedIn">
+      <div class="col">
+        <p>You are logged in</p>
+      </div>
+    </div>
   </div>
 </template>
 

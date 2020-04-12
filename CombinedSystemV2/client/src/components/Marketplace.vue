@@ -24,6 +24,7 @@
             <p class="card-text"> Weight: {{hop.weight}}</p>
             <p class="card-text"> Price: {{hop.price}}</p>
           </div>
+          <router-link :to="{ name: 'buyhop', params: {id: hop.id, variety: hop.variety } }">Buy hop</router-link>
         </div>
       </div>
     </div>
@@ -34,6 +35,7 @@
 <script>
 /* eslint-disable */
 import AddProduct from './AddProduct'
+import BuyHop from './BuyHop'
 import _ from 'lodash'
 import axios from 'axios'
 
@@ -44,7 +46,8 @@ export default {
     }
   },
   components: {
-    AddProduct
+    AddProduct,
+    BuyHop
   }, 
   computed: {
     /*
