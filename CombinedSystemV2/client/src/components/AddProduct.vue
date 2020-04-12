@@ -16,6 +16,7 @@
               <input type="number" v-model="price" name="price" placeholder="0 Dollars"><br>
               <button @click="addHop">Add hop</button><br>
             <div class="error" v-html="error"/><br>
+            <div class="success" v-html="successMessage"/><br>
             </form>
           </div>
         </div>
@@ -32,7 +33,8 @@ export default {
       bitterness: '',
       sweetness: '',
       price: '',
-      error: null
+      error: null,
+      successMessage: null
     }
   },
   methods: {
@@ -45,6 +47,7 @@ export default {
           sweetness: this.sweetness,
           price: this.price
         })
+        this.succcessMessage = 'User created'
       } catch (error) {
         this.error = error.response.data.error
       }

@@ -31,6 +31,6 @@ export default new Vuex.Store({
     },
     setUser({commit}, token) { 
         commit('setUser', token)
-      }
+    },
   }
 })

@@ -19,7 +19,8 @@
           v-model="password"
           placeholder="password"
         />
-        <div class="error" v-html="error"/><br>
+        <div class="error padTop" v-html="error"/><br>
+        <div class="success" v-html="successMessage"/><br>
         <button @click="register">Register</button>
       </div>
     </div>
@@ -33,7 +34,8 @@ export default {
     return {
       email: '',
       password: '',
-      error: null
+      error: null,
+      successMessage: null
     }
   },
   methods: {
@@ -45,7 +47,10 @@ export default {
         })
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
+        this.error = null
+        this.successMessage = 'User created'
       } catch (error) {
+        this.successMessage = 'User created'
         this.error = error.response.data.error
       }
     }
@@ -54,7 +59,4 @@ export default {
 </script>
 
 <style scoped>
-.error {
-  color: red;
-}
 </style>

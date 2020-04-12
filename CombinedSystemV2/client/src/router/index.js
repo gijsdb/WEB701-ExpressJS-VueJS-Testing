@@ -4,6 +4,7 @@ import Register from '@/components/Register'
 import Home from '@/components/Home'
 import Login from '@/components/Login'
 import Marketplace from '@/components/Marketplace'
+import store from '../store/store'
 
 Vue.use(Router)
 
@@ -27,21 +28,20 @@ export default new Router({
     {
       path: '/marketplace',
       name: 'marketplace',
-      component: Marketplace
-      /*
+      component: Marketplace,
       async beforeEnter (to, from, next) {
         try {
-          var hasPermission = this.$store.state.isUserLoggedIn
+          var hasPermission = store.state.isUserLoggedIn
           if (hasPermission) {
             next()
           }
-        } catch (e) {
+        } catch (error) {
+          console.log(error)
           next({
             name: 'home'
           })
         }
       }
-      */
     }
   ]
 })

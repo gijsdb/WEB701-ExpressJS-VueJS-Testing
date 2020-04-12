@@ -25,6 +25,14 @@ export default {
   padding-bottom: 2em;
 }
 
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
