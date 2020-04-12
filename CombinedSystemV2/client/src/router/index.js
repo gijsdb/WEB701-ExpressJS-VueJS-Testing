@@ -28,6 +28,20 @@ export default new Router({
       path: '/marketplace',
       name: 'marketplace',
       component: Marketplace
+      /*
+      async beforeEnter (to, from, next) {
+        try {
+          var hasPermission = this.$store.state.isUserLoggedIn
+          if (hasPermission) {
+            next()
+          }
+        } catch (e) {
+          next({
+            name: 'home'
+          })
+        }
+      }
+      */
     }
   ]
 })
