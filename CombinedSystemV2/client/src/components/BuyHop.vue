@@ -1,7 +1,7 @@
 <template>
   <!-- eslint-disable -->
   <div class="container padTop">
-        <router-link class="nav-link" to="../marketplace">Back</router-link>
+        <router-link class="nav-link padBottom" to="../marketplace">Back</router-link>
     <div class="row">
         <div class="col-md-6">
             <h2>Variety</h2>
@@ -16,6 +16,7 @@
             <h3>{{ hop.sweetness }} </h3><br>
         </div>
         <div class="col-md-6">
+          <Bidding></Bidding>
         </div>
     </div>
   </div>
@@ -23,12 +24,16 @@
 
 <script>
 import axios from 'axios'
+import Bidding from './Bidding'
 
 export default {
   data () {
     return {
-      hop: []
+      hop: {}
     }
+  },
+  components: {
+    Bidding
   },
   created: function () {
     axios

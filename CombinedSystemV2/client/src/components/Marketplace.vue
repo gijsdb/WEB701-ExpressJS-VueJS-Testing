@@ -25,7 +25,7 @@
             <p class="card-text"> Price: {{hop.price}}</p>
             <p class="card-text"> Added by: {{hop.userId}}</p>
           </div>
-          <router-link :to="{ name: 'buyhop', params: {id: hop.id, variety: hop.variety } }">Buy hop</router-link>
+          <router-link :to="{ name: 'buyhop', params: {id: hop.hopId, variety: hop.variety } }">Buy hop</router-link>
         </div>
       </div>
     </div>

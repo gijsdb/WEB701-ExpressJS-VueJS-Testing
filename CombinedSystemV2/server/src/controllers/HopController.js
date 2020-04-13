@@ -25,10 +25,11 @@ module.exports = {
     },
     async retrievehop (req, res) {
       try {
-        const hopid = req.params.id
+        const hopId = req.params.id
+        console.log(hopId)
         const hop = await Hop.findOne({
           where: {
-            id: hopid
+            hopId: hopId
           }
         })
         if(!hop) {

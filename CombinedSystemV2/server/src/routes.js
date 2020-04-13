@@ -1,5 +1,6 @@
 const AuthController = require('./controllers/AuthController')
 const HopController = require('./controllers/HopController')
+const BidController = require('./controllers/BidController')
 const AuthControllerPolicy = require('./policies/AuthControllerPolicy')
 
 module.exports = (app) => {
@@ -11,4 +12,6 @@ module.exports = (app) => {
 
     app.get('/retrievehops', HopController.retrievehops) 
     app.get('/retrievehop/:id', HopController.retrievehop) 
+
+    app.post('/addbid', BidController.addbid) 
 }

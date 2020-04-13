@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     sweetness: DataTypes.INTEGER,
     price: DataTypes.FLOAT,
     userId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       foreignKey: true,
       allowNull: false
     }
