@@ -32,6 +32,7 @@ export default {
       bitterness: '',
       sweetness: '',
       price: '',
+      userId: this.$store.state.user.email,
       error: null
     }
   },
@@ -43,7 +44,8 @@ export default {
           weight: this.weight,
           bitterness: this.bitterness,
           sweetness: this.sweetness,
-          price: this.price
+          price: this.price,
+          userId: this.userId
         })
         this.$router.replace({'query': null})
       } catch (error) {

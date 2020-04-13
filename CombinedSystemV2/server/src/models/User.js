@@ -1,5 +1,6 @@
 const Promise = require('bluebird')
 const bcrypt = Promise.promisifyAll(require('bcrypt-nodejs'))
+const Hop = require('./Hop')
 
 function hashPassword(user, options) {
   const SALT_FACTOR = 8
@@ -28,6 +29,11 @@ module.exports = (sequelize, DataTypes) => {
       beforeSave: hashPassword
     }
   })
+
+  User.associate = function(models) {
+    models.User.hasMany(models.Hop);
+  };
+
 
   User.prototype.comparePassword = function (password) {
     return bcrypt.compareAsync(password, this.password)

@@ -23,6 +23,7 @@
             <p class="card-text"> Sweetness: {{hop.sweetness}}</p>
             <p class="card-text"> Weight: {{hop.weight}}</p>
             <p class="card-text"> Price: {{hop.price}}</p>
+            <p class="card-text"> Added by: {{hop.UserId}}</p>
           </div>
           <router-link :to="{ name: 'buyhop', params: {id: hop.id, variety: hop.variety } }">Buy hop</router-link>
         </div>
