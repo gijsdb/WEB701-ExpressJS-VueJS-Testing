@@ -1,5 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   const Hop = sequelize.define('Hop', {
+    hopId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true
+    },
     variety: {
       type: DataTypes.STRING,
       unique: true
@@ -7,18 +11,29 @@ module.exports = (sequelize, DataTypes) => {
     weight: DataTypes.FLOAT,
     bitterness: DataTypes.INTEGER,
     sweetness: DataTypes.INTEGER,
-    price: DataTypes.FLOAT    
+    price: DataTypes.FLOAT,
+    userId: {
+      type: DataTypes.INTEGER,
+      foreignKey: true,
+      allowNull: false
+    }
 })
+
+
+
+  /*
   Hop.associate = function (models) {
     models.Hop.belongsTo(models.User, {
       onDelete: "CASCADE",
-      userId: {
+      foreignKey: {
+        name: 'UserId',
         type: DataTypes.STRING,
         allowNull: false,
-        unique: false,
-        as: 'User'
+        unique: false
       }
     });
   };
+  */
+
   return Hop
 }

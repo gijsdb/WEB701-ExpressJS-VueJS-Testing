@@ -4,6 +4,7 @@ module.exports = {
     async addhop (req, res) {
       try {
         const hop = await Hop.create(req.body)
+        console.log(req.body.userId)
         res.send(hop.toJSON())
       } catch(err) {
         res.status(400).send({
@@ -25,7 +26,6 @@ module.exports = {
     async retrievehop (req, res) {
       try {
         const hopid = req.params.id
-        console.log(hopid)
         const hop = await Hop.findOne({
           where: {
             id: hopid
