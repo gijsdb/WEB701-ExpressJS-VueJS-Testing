@@ -34,10 +34,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   })
 
+  /*
   User.associate = function(models) {
     models.User.hasMany(models.Hop);
   };
-
+  */
 
   User.prototype.comparePassword = function (password) {
     return bcrypt.compareAsync(password, this.password)

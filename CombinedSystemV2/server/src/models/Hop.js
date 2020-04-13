@@ -18,8 +18,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
 })
-
-
+  /*
+  Hop.associate = function (models) {
+    models.Hop.belongsTo(models.User, {foreignKey : 'userId'});
+  };
+  */
 
   /*
   Hop.associate = function (models) {
