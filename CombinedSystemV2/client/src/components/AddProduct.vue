@@ -1,24 +1,42 @@
 <template>
   <div class="container padTop">
     <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col">
+            <h2>Add new hops</h2>
+          </div>
+        </div>
+
+        <div class="row">
           <div class="col">
             <form class="AddHops">
-              <h1>Add new hops</h1>
-              <label>Variety</label>
-              <input type="text" v-model="variety" name="variety" placeholder="variety"><br>
-              <label>Weight</label>
-              <input type="number" v-model="weight" name="amount" placeholder="0(kg)"><br>
-              <label>Bitterness</label>
-              <input type="number" v-model="bitterness" name="bitterness" placeholder="0 - 10"><br>
-              <label>Sweetness</label>
-              <input type="number" v-model="sweetness" name="sweetness" placeholder="0 - 10"><br>
-              <label>Price</label>
-              <input type="number" v-model="price" name="price" placeholder="0 Dollars"><br>
-              <button @click="addHop">Add hop</button><br>
-            <div class="error" v-html="error"/><br>
+                <div class="row">
+                  <div class="col">
+                  <label>Variety</label><br>
+                  <input type="text" v-model="variety" name="variety" placeholder="variety"><br>
+                  <label>Weight</label><br>
+                  <input type="number" v-model="weight" name="amount" placeholder="0(kg)"><br>
+                  </div>
+                  <div class="col">
+                    <label>Bitterness</label><br>
+                    <input type="number" v-model="bitterness" name="bitterness" placeholder="0 - 10"><br>
+                    <label>Sweetness</label><br>
+                    <input type="number" v-model="sweetness" name="sweetness" placeholder="0 - 10"><br>
+                  </div>
+                </div>
+                <label>Price</label><br>
+                <input type="number" v-model="price" name="price" placeholder="0 Dollars"><br>
+                <button @click="addHop" class="btnAddHop">Add hop</button><br>
+              <div class="error" v-html="error"/><br>
             </form>
           </div>
         </div>
+      </div>
+      <div class="col-md-6">
+        <h2>Free for extra fuctions</h2>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -57,4 +75,15 @@ export default {
 </script>
 
 <style scoped>
+.AddHops input {
+  text-align: center;
+}
+
+.AddHops label {
+  margin-top: .5em;
+}
+
+.btnAddHop {
+  margin-top: 1em;
+}
 </style>

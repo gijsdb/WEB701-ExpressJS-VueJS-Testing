@@ -13,8 +13,9 @@
           </div>
       </div>
 
-    <div class="row padBottom">
-      <div class="col-md-4" v-for="hop in hops" :key="hop.id">
+    <div class="row padBottom" v-for="chunk in productChunks">
+<!-- v-for="hop in hops" :key="hop.id" !-->
+      <div class="col-md-4" v-for="hop in chunk">
         <div class="card hopCard" style="width: 18rem;">
           <img src="../assets/isolatedHop.png" class="card-img-top" alt="...">
           <div class="card-body">
@@ -28,6 +29,7 @@
           <router-link :to="{ name: 'buyhop', params: {id: hop.hopId, variety: hop.variety } }">Buy hop</router-link>
         </div>
       </div>
+
     </div>
     
   </div>
@@ -51,11 +53,9 @@ export default {
     BuyHop
   }, 
   computed: {
-    /*
     productChunks () {
       return _.chunk(Object.values(this.hops), 3)
     }
-    */
   },
   created: function() {
     axios
@@ -72,6 +72,10 @@ export default {
 
 <style scoped>
 .hopCard {
+  padding: .5em;
+  border-color: #ffffff;
+  color: #515151;
   margin-top: 10px;
+  background-color: #D7C369;
 }
 </style>

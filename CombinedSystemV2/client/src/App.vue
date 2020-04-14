@@ -18,7 +18,7 @@ export default {
 
 <style>
 .padTop {
-  padding-top: 2em;
+  padding-top: 3.2em;
 }
 
 .padBottom {
@@ -38,7 +38,9 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: #515151;
+  min-height: 100vh;
+  height: auto;
+  background-color: #EBD77D;
 }
 </style>
