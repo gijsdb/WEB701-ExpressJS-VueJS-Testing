@@ -4,19 +4,16 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         primaryKey: true
       },
-      amount: DataTypes.INTEGER,
-      bidder: DataTypes.STRING,
-      date: {
-        type: DataTypes.DATEONLY,
-        allowNull: false,
-        defaultValue: sequelize.NOW
+      bidAmount: DataTypes.INTEGER,
+      userId: {
+        type: DataTypes.STRING,
+        allowNull: false
       },
       hopId: {
         type: DataTypes.INTEGER,
-        foreignKey: true,
         allowNull: false
       }
-  })
+  })  
     return Bid
   }
   

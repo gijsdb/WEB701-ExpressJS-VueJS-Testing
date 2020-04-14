@@ -16,7 +16,7 @@
             <h3>{{ hop.sweetness }} </h3><br>
         </div>
         <div class="col-md-6">
-          <Bidding></Bidding>
+          <Bidding :hop="hop"></Bidding>
         </div>
     </div>
   </div>

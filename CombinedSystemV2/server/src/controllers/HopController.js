@@ -4,7 +4,6 @@ module.exports = {
     async addhop (req, res) {
       try {
         const hop = await Hop.create(req.body)
-        console.log(req.body.userId)
         res.send(hop.toJSON())
       } catch(err) {
         res.status(400).send({

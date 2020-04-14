@@ -1,38 +1,55 @@
 <template>
   <!-- eslint-disable -->
   <div>
-    <h2>Bids</h2>
+    <h2>Bidding</h2>
     <label>Price</label>
-    <input type="number" v-model="amount" name="amount" placeholder="0 Dollars"><br>
+    <input type="number" v-model="bidAmount" name="amount" placeholder="0 Dollars"><br>
     <button @click="addBid">Place bid</button><br>
     <div class="error" v-html="error"/><br>
+    <ul id="bid-list">
+      <li v-for="bid in bids" :key="bid.bidId">
+        <p>Bid amount of ${{ bid.bidAmount }} by {{bid.userId}} at {{bid.createdAt}} </p>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
 import bidService from '../services/bidService'
+import axios from 'axios'
+
 export default {
   data () {
     return {
-      amount: '',
-      userId: this.$store.state.user.email,
-      error: null
+      bidAmount: '',
+      userId: '',
+      hopId: '',
+      error: null,
+      bids: []
     }
+  },
+  created: function () {
+    axios
+      .get('http://localhost:8081/retrievebids')
+      .then(res => {
+        this.bids = res.data
+      })
   },
   methods: {
     async addBid () {
       try {
-        await bidService.addbid({
-          amount: this.amount,
-
-          hopId: this.userId
+        const newHop = await bidService.addbid({
+          bidAmount: this.bidAmount,
+          userId: this.$store.state.user.email,
+          hopId: this.hop.hopId
         })
-        this.$router.replace({'query': null})
+        console.log(newHop)
       } catch (error) {
         this.error = error.response.data.error
       }
     }
-  }
+  },
+  props: ['hop']
 }
 </script>
 
