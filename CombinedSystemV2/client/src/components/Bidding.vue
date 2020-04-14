@@ -7,7 +7,7 @@
     <button @click="addBid">Place bid</button><br>
     <div class="error" v-html="error"/><br>
     <ul id="bid-list">
-      <li v-for="bid in bids" :key="bid.bidId">
+      <li v-for="bid in matchingBids" :key="bid.bidId">
         <p>Bid amount of ${{ bid.bidAmount }} by {{bid.userId}} at {{bid.createdAt}} </p>
       </li>
     </ul>
@@ -25,16 +25,36 @@ export default {
       userId: '',
       hopId: '',
       error: null,
-      bids: []
+      matchingBids: [],
+      allBids: []
     }
   },
   created: function () {
     axios
       .get('http://localhost:8081/retrievebids')
       .then(res => {
-        this.bids = res.data
+        this.allBids = res.data
+        this.allBids.forEach(element => {
+          if (element.hopId === this.hop.hopId) {
+            this.matchingBids.push(element)
+          }
+        })
+        // this.bids = res.data
       })
   },
+  /*
+  computed: {
+    showTheBids: function () {
+      const matchingBids = []
+      this.bids.forEach(element => {
+        if (element.hopId === this.hop.hopId) {
+          matchingBids.push(element)
+        }
+      })
+      return matchingBids
+    }
+  },
+  */
   methods: {
     async addBid () {
       try {
