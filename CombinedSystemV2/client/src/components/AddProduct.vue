@@ -15,17 +15,17 @@
                   <div class="col">
                   <label>Variety</label><br>
                   <input type="text" v-model="variety" name="variety" placeholder="variety"><br>
-                  <label>Weight</label><br>
-                  <input type="number" v-model="weight" name="amount" placeholder="0(kg)"><br>
+                  <label>Weight (KG)</label><br>
+                  <input type="number" v-on:input="calculatePrice" v-model="weight" name="amount"  min="1" max="100" placeholder="weight"><br>
                   </div>
                   <div class="col">
                     <label>Bitterness</label><br>
-                    <input type="number" v-model="bitterness" name="bitterness" placeholder="0 - 10"><br>
+                    <input type="number" v-on:input="calculatePrice" v-model="bitterness" name="bitterness" placeholder="bitterness" value="1" min="1" max="10"><br>
                     <label>Sweetness</label><br>
-                    <input type="number" v-model="sweetness" name="sweetness" placeholder="0 - 10"><br>
+                    <input type="number" v-on:input="calculatePrice" v-model="sweetness" name="sweetness" placeholder="sweetness" value="1" min="1" max="10"><br>
                   </div>
                 </div>
-                <label>Price</label><br>
+                <label>Price (NZD)</label><br>
                 <input type="number" v-model="price" name="price" placeholder="0 Dollars"><br>
                 <button @click="addHop" class="btnAddHop">Add hop</button><br>
               <div class="error" v-html="error"/><br>
@@ -54,7 +54,37 @@ export default {
       error: null
     }
   },
+  computed: {
+  },
   methods: {
+    calculatePrice: function () {
+      // var sweetness = this.sweetness
+      // var bitterness = this.bitterness
+      var weight = this.weight
+      var price
+      var multiplier
+      if (weight >= 1 && weight <= 20) {
+        multiplier = 3
+        price = weight * multiplier
+        this.price = price.toFixed(2)
+      } else if (weight >= 21 && weight <= 40) {
+        multiplier = 2.7
+        price = weight * multiplier
+        this.price = price.toFixed(2)
+      } else if (weight >= 41 && weight <= 60) {
+        multiplier = 2.5
+        price = weight * multiplier
+        this.price = price.toFixed(2)
+      } else if (weight >= 61 && weight <= 80) {
+        multiplier = 2.3
+        price = weight * multiplier
+        this.price = price.toFixed(2)
+      } else if (weight >= 81 && weight <= 100) {
+        multiplier = 2.1
+        price = weight * multiplier
+        this.price = price.toFixed(2)
+      }
+    },
     async addHop () {
       try {
         await hopService.addhop({
