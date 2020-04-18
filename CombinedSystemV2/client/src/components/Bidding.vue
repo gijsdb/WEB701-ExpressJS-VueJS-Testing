@@ -3,7 +3,7 @@
   <div>
     <h2>Bidding</h2>
     <label>Price</label>
-    <input type="number" v-model="bidAmount" name="amount" placeholder="0 Dollars"><br>
+    <input type="number" v-model="bidAmount" name="amount" placeholder="0 Dollars" :min="this.hop.price"><br>
     <button @click="addBid">Place bid</button><br>
     <div class="error" v-html="error"/><br>
     <ul id="bid-list">
@@ -57,6 +57,10 @@ export default {
   */
   methods: {
     async addBid () {
+      if (this.bidAmount < this.hop.price) {
+        alert('Your bid amount must be above the set price')
+        return
+      }
       try {
         const newHop = await bidService.addbid({
           bidAmount: this.bidAmount,
@@ -67,6 +71,7 @@ export default {
       } catch (error) {
         this.error = error.response.data.error
       }
+      this.$router.go()
     }
   },
   props: ['hop']

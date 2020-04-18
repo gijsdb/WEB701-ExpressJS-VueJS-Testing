@@ -12,6 +12,7 @@
         <div class="row">
           <div class="col">
             <h2>Account details</h2>
+            <p>{{this.$store.state.user.email}}</p>
           </div>
         </div>
       </div>
